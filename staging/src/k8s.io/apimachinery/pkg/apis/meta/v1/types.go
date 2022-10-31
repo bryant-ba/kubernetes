@@ -925,16 +925,18 @@ type APIGroupList struct {
 
 // APIGroup contains the name, the supported versions, and the preferred version
 // of a group.
+
+//<group>/<version>/<resource>
 type APIGroup struct {
 	TypeMeta `json:",inline"`
 	// name is the name of the group.
-	Name string `json:"name" protobuf:"bytes,1,opt,name=name"`
+	Name string `json:"name" protobuf:"bytes,1,opt,name=name"` //资源组名称
 	// versions are the versions supported in this group.
-	Versions []GroupVersionForDiscovery `json:"versions" protobuf:"bytes,2,rep,name=versions"`
+	Versions []GroupVersionForDiscovery `json:"versions" protobuf:"bytes,2,rep,name=versions"` // 资源组下所支持的资源版本
 	// preferredVersion is the version preferred by the API server, which
 	// probably is the storage version.
 	// +optional
-	PreferredVersion GroupVersionForDiscovery `json:"preferredVersion,omitempty" protobuf:"bytes,3,opt,name=preferredVersion"`
+	PreferredVersion GroupVersionForDiscovery `json:"preferredVersion,omitempty" protobuf:"bytes,3,opt,name=preferredVersion"` //首选版本。当一个资源组内存在多个资源版本时，Kubernetes API Server在使用资源时会选择一个首选版本作为当前版本
 	// a map of client CIDR to server address that is serving this group.
 	// This is to help clients reach servers in the most network-efficient way possible.
 	// Clients can use the appropriate server address as per the CIDR that they match.
